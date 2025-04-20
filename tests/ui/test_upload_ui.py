@@ -2,11 +2,20 @@ import pytest
 from playwright.sync_api import Page
 
 class TestUploadUI:
-    def test_valid_file_upload(self, page: Page):
-        page.goto("https://the-internet.herokuapp.com/upload")
-        page.set_input_files("input#file-upload", "test_data/sample.txt")
-        page.click("input#file-submit")
-        assert "File Uploaded!" in page.text_content("h3")
+   def test_valid_file_upload(self, page: Page):
+    page.goto(UPLOAD_URL)
+    page.set_input_files("input#file-upload", "test_data/sample.txt")
+    page.click("input#file-submit")
+    
+    # Deeper checks
+    assert page.locator("#uploaded-files").is_visible()
+    uploaded_text = page.locator("#uploaded-files").inner_text().strip()
+    assert uploaded_text != "", "No file name shown after upload"
+
+    # Check for hidden server errors
+    body_text = page.locator("body").inner_text()
+    assert "Internal Server Error" not in body_text
+    assert "500" not in body_text
 
     def test_no_file_selected(self, page: Page):
         page.goto("https://the-internet.herokuapp.com/upload")
