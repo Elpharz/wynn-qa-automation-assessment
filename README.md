@@ -13,14 +13,30 @@ Automated test suite using Python + Playwright for both UI and API functionality
 - ✅ CI integration (GitHub Actions)
 - ✅ Secure config with `.env`
 
-## Setup
+## 1  🛠️ Setup Instructions
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use venv\Scripts\activate
+
+
+1. Clone the repo:
+```bash
+git clone https://github.com/elpharz/wynn-qa-automation-assessment.git
+cd wynn-qa-automation-assessment
+```
+## 2 Create and activate a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+## 3 Install dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
-## Running Tests
+## 4 Install Playwright drivers:
+```bash
+python -m playwright install
+```
+## 5 Running Tests
 ```bash
 pytest --alluredir=reports/allure-results
 allure serve reports/allure-results
