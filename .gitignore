@@ -181,3 +181,4 @@ reports/
 allure-results/
 *.pyc
 >>>>>>> af1cab9 (Initial commit: project structure, virtualenv, and config setup)
+allure-report/
